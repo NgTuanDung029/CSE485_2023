@@ -9,8 +9,6 @@ $file = file_get_contents("../database/students-data.csv");
 if ($file !== false) {
     $datas = str_getcsv($file, "\n");
     $students = new StudentList();
-
-    
 } else {
     echo "Failed to read the file.";
 }
