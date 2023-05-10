@@ -1,8 +1,7 @@
 <?php 
-include './Student.php';
-
+use Models\Student;
 class StudentList {
-    private $student_list;
+    public $student_list;
 
     public function __construct() {
         $this->student_list = array();
@@ -20,6 +19,7 @@ class StudentList {
             if ($this->student_list[$i]->code == $new_student->code)
             {
                 $error = "Student's code duplicated. Please enter the new one.";
+                return $error;
             }
             else {
                 $this->addStudent($new_student);
