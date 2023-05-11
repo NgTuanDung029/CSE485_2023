@@ -20,4 +20,24 @@ class Student
         $this->address = $address;
         $this->phone_num = $phone_num;
     }
+    public function getFullName()
+    {
+        return $this->full_name;
+    }
+    public function getClass()
+    {
+        return $this->class;
+    }
+    public function getCode()
+    {
+        return $this->code;
+    }
+    public function getAddress()
+    {
+        return $this->address;
+    }
+    public function getPhone()
+    {
+        return $this->phone_num;
+    }
 }
