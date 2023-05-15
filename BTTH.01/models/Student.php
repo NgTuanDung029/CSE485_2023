@@ -24,20 +24,40 @@ class Student
     {
         return $this->full_name;
     }
+    public function setFullName(string $full_name)
+    {
+        $this->full_name = $full_name;
+    }
     public function getClass()
     {
         return $this->class;
+    }
+    public function setClass(string $class)
+    {
+        $this->class = $class;
     }
     public function getCode()
     {
         return $this->code;
     }
+    public function setCode(string $code)
+    {
+        $this->code = $code;
+    }
     public function getAddress()
     {
         return $this->address;
     }
+    public function setAddress(string $address)
+    {
+        $this->address = $address;
+    }
     public function getPhone()
     {
         return $this->phone_num;
+    }
+    public function setPhone(string $phone_num)
+    {
+        $this->phone_num = $phone_num;
     }
 }
