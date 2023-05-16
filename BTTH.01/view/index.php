@@ -12,6 +12,21 @@ if ($file !== false) {
 } else {
   echo "Failed to read the file.";
 }
+
+//
+$studenList = new StudentList();
+if (isset($_POST["add"])) {
+  $code = trim($_POST["code"]);
+  $fullName = trim($_POST["fullName"]);
+  $class = trim($_POST["class"]);
+  $address = trim($_POST["address"]);
+  $phoneNumber = trim($_POST["phoneNumber"]);
+  if ($code != "" && $fullName != "" && $class != "" && $address != "" && $phoneNumber != "") {
+    $student = new Student($code, $fullName, $class, $address, $phoneNumber);
+    $studenList->addStudent($student);
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -62,25 +77,23 @@ if ($file !== false) {
     </tbody>
   </table>
 
-  <form action="/action_page.php">
-<div class="form-group">
-    <h1 style="font-size:30px; color: blue;">Add student</h1>
-    <label for="Add">Code</label>
-    <input class="form-control" id="Code">
-    <label for="Add">Full Name</label>
-    <input class="form-control" id="Name">
-    <label for="Add">Class</label>
-    <input class="form-control" id="Class">
-    <label for="Add">Address</label>
-    <input class="form-control" id="Address">
-    <label for="Add">Phone Number</label>
-    <input class="form-control" id="Phone Number">
-  </div>
-  
-</form>
+  <form method="POST" action="">
+    <div class="form-group">
+      <h1 style="font-size:30px; color: blue;">Add student</h1>
+      <label for="Add">Code</label>
+      <input class="form-control" id="Code" type="text" name="code">
+      <label for="Add">Full Name</label>
+      <input class="form-control" id="Name" type="text" name="fullName">
+      <label for="Add">Class</label>
+      <input class="form-control" id="Class" type="text" name="class">
+      <label for="Add">Address</label>
+      <input class="form-control" id="Address" type="text" name="address">
+      <label for="Add">Phone Number</label>
+      <input class="form-control" id="Phone Number" type="text" name="phoneNumber">
+      <input class='btn-add' type="submit" name="add" value="Add">
+    </div>
 
-
-  <button class="btn-add">Add</button>
+  </form>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 
