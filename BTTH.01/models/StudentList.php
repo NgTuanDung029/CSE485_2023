@@ -10,7 +10,6 @@ class StudentList {
     public function addStudent(Student $student) {
         array_push($this->student_list, $student);
     }
-
     public function checkStudent(Student $new_student) {
         $list_size = sizeof($this->student_list);
         $error = "";
