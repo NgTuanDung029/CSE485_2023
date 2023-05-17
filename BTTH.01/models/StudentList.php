@@ -26,4 +26,30 @@ class StudentList {
             }
         }
     }
+
+    
+require_once 'Student.php';
+
+$students = array();
+
+// Đọc dữ liệu từ file
+$data = file('DS.txt');
+
+// Lặp qua từng dòng trong file
+foreach ($data as $line) {
+  // Chuyển đổi dữ liệu thành một đối tượng sinh viên và lưu vào mảng
+  $fields = explode(',', trim($line));
+  $code = $fields[0];
+  $fullname = $fields[1];
+  $class = $fields[2];
+  $address = $fields[3];
+  $phonenumber = $fields[4];
+  $student = new Student($code, $fullname, $class, $address, $phonenumber );
+  array_push($students, $student);
+}
+
+// Hiển thị danh sách sinh viên
+foreach ($students as $student) {
+  echo $student->getName() . ' - ' . $student->getDob() . ' - ' . $student->getEmail() . ' - ' . $student->getPhone() . '<br>';
+}
 }
