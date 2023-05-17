@@ -1,54 +1,64 @@
-<?php 
+<?php
+
 use Models\Student;
-class StudentList {
-    public $student_list;
 
-    public function __construct() {
-        $this->student_list = array();
+class StudentList extends Student
+{
+    public $students = [];
+
+    public function __construct()
+    {
+        $this->loadData();
     }
 
-    public function addStudent(Student $student) {
-        array_push($this->student_list, $student);
-    }
-    public function checkStudent(Student $new_student) {
-        $list_size = sizeof($this->student_list);
-        $error = "";
-        for ($i = 0; $i < $list_size; $i++)
-        {
-            if ($this->student_list[$i]->code == $new_student->code)
-            {
-                $error = "Student's code duplicated. Please enter the new one.";
-                return $error;
+    private function loadData()
+    {
+        if (($handle = fopen("../database/students-data.csv", "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $code = $data[0];
+                $full_name = $data[1];
+                $class = $data[2];
+                $address = $data[3];
+                $phone_num = $data[4];
+                $student = new Student($code, $full_name, $class, $address, $phone_num);
+                array_push($this->students, $student);
             }
-            else {
-                $this->addStudent($new_student);
-            }
+            fclose($handle);
         }
     }
 
-    
-require_once 'Student.php';
+    public function getAll()
+    {
+        return $this->students;
+    }
 
-$students = array();
+    public function getByCode($code)
+    {
+        foreach ($this->students as $student) {
+            if ($student->getCode() == $code) {
+                return $student;
+            }
+        }
+        return null;
+    }
 
-// Đọc dữ liệu từ file
-$data = file('DS.txt');
+    public function add($student)
+    {
+        if ($this->getByCode($student->getCode()) == null) {
+            array_push($this->students, $student);
+            $this->saveData();
+            return true;
+        }
+        return false;
+    }
 
-// Lặp qua từng dòng trong file
-foreach ($data as $line) {
-  // Chuyển đổi dữ liệu thành một đối tượng sinh viên và lưu vào mảng
-  $fields = explode(',', trim($line));
-  $code = $fields[0];
-  $fullname = $fields[1];
-  $class = $fields[2];
-  $address = $fields[3];
-  $phonenumber = $fields[4];
-  $student = new Student($code, $fullname, $class, $address, $phonenumber );
-  array_push($students, $student);
-}
 
-// Hiển thị danh sách sinh viên
-foreach ($students as $student) {
-  echo $student->getName() . ' - ' . $student->getDob() . ' - ' . $student->getEmail() . ' - ' . $student->getPhone() . '<br>';
-}
+    private function saveData()
+    {
+        $handle = fopen("../database/students-data.csv", "w");
+        foreach ($this->students as $student) {
+            fputcsv($handle, [$student->getCode(), $student->getFullName(), $student->getClass(), $student->getAddress(), $student->getPhone()]);
+        }
+        fclose($handle);
+    }
 }

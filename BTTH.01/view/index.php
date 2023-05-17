@@ -1,20 +1,22 @@
 <?php
-include_once('../models/Student.php');
-require('../models/StudentList.php');
 
 use Models\Student;
 
-$file = file_get_contents("../database/students-data.csv");
 
-if ($file !== false) {
-  $datas = str_getcsv($file, "\n");
-  $students = new StudentList();
-} else {
-  echo "Failed to read the file.";
+require_once('../models/Student.php');
+require_once('../models/StudentList.php');
+
+$studentList = new StudentList();
+
+if (isset($_POST['add'])) {
+  $code = $_POST['code'];
+  $full_name = $_POST['full_name'];
+  $class = $_POST['class'];
+  $address = $_POST['address'];
+  $phone_num = $_POST['phone_num'];
+  $student = new Student($code, $full_name, $class, $address, $phone_num);
+  $studentList->add($student);
 }
-
-//
-
 
 ?>
 
@@ -32,6 +34,7 @@ if ($file !== false) {
 </head>
 
 <body>
+  <h1>Students infomation</h1>
   <table class="table">
     <thead>
       <tr>
@@ -40,28 +43,23 @@ if ($file !== false) {
         <th scope="col">Class</th>
         <th scope="col">Address</th>
         <th scope="col">Phone Number</th>
-        <th>Delete</th>
-        <th>Update</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th>
       </tr>
     </thead>
     <tbody>
-      <?php
-      foreach ($datas as $data) {
-        $splitData = explode(";", $data);
-        $student = new Student($splitData[1], $splitData[2], $splitData[0], $splitData[3], $splitData[4]);
-        $students->addStudent($student);
-      ?>
+      <?php foreach ($studentList->getAll() as $student) : ?>
         <tr>
-          <th scope="row"><?= $student->code ?></th>
-          <td><?= $student->full_name ?></td>
-          <td><?= $student->class ?></td>
-          <td><?= $student->address ?></td>
-          <td><?= $student->phone_num ?></td>
-          <td><button><i class="fa-solid fa-trash-can"></i></button></td>
-          <td><button><i class="fa-solid fa-pen-to-square"></i></button></i></td>
+          <td><?php echo $student->getCode(); ?></td>
+          <td><?php echo $student->getFullName(); ?></td>
+          <td><?php echo $student->getClass(); ?></td>
+          <td><?php echo $student->getAddress(); ?></td>
+          <td><?php echo $student->getPhone(); ?></td>
+          <td><i class="fa-solid fa-trash-can"></i></td>
+          <td><i class="fa-solid fa-pen"></i></td>
+          </td>
         </tr>
-      <?php }
-      ?>
+      <?php endforeach; ?>
     </tbody>
   </table>
 
@@ -69,15 +67,15 @@ if ($file !== false) {
     <div class="form-group">
       <h1 style="font-size:30px; color: blue;">Add student</h1>
       <label for="Add">Code</label>
-      <input class="form-control" id="Code" type="text" name="code" value="">
+      <input class="form-control" id="Code" type="text" name="code">
       <label for="Add">Full Name</label>
-      <input class="form-control" id="Name" type="text" name="fullName">
+      <input class="form-control" id="Name" type="text" name="full_name">
       <label for="Add">Class</label>
       <input class="form-control" id="Class" type="text" name="class">
       <label for="Add">Address</label>
       <input class="form-control" id="Address" type="text" name="address">
       <label for="Add">Phone Number</label>
-      <input class="form-control" id="Phone Number" type="text" name="phoneNumber">
+      <input class="form-control" id="Phone Number" type="text" name="phone_num">
       <input class='btn-add' type="submit" name="add" value="Add">
     </div>
 
