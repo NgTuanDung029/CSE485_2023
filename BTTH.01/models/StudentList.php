@@ -1,4 +1,5 @@
-<?php 
+<?php
+namespace Models;
 use Models\Student;
 class StudentList {
     public $student_list;
@@ -18,13 +19,12 @@ class StudentList {
         {
             if ($this->student_list[$i]->code == $new_student->code)
             {
-                $error = "Student's code duplicated. Please enter the new one.";
+                $error = "Student's code duplicated. Please try again.";
                 return $error;
             }
-            else {
-                $this->addStudent($new_student);
-            }
         }
+        $this->addStudent($new_student);
+        return $error;
     }
 }
 
