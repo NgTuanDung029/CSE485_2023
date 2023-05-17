@@ -14,18 +14,7 @@ if ($file !== false) {
 }
 
 //
-$studenList = new StudentList();
-if (isset($_POST["add"])) {
-  $code = trim($_POST["code"]);
-  $fullName = trim($_POST["fullName"]);
-  $class = trim($_POST["class"]);
-  $address = trim($_POST["address"]);
-  $phoneNumber = trim($_POST["phoneNumber"]);
-  if ($code != "" && $fullName != "" && $class != "" && $address != "" && $phoneNumber != "") {
-    $student = new Student($code, $fullName, $class, $address, $phoneNumber);
-    $studenList->addStudent($student);
-  }
-}
+
 
 ?>
 
@@ -73,7 +62,6 @@ if (isset($_POST["add"])) {
         </tr>
       <?php }
       ?>
-
     </tbody>
   </table>
 
@@ -81,7 +69,7 @@ if (isset($_POST["add"])) {
     <div class="form-group">
       <h1 style="font-size:30px; color: blue;">Add student</h1>
       <label for="Add">Code</label>
-      <input class="form-control" id="Code" type="text" name="code">
+      <input class="form-control" id="Code" type="text" name="code" value="">
       <label for="Add">Full Name</label>
       <input class="form-control" id="Name" type="text" name="fullName">
       <label for="Add">Class</label>
