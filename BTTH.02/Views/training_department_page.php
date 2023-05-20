@@ -1,5 +1,6 @@
 <?php
 include_once('../Models/connectDB.php');
+include_once('../Controllers/get_data_training_department.php');
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +33,6 @@ include_once('../Models/connectDB.php');
         </thead>
         <tbody>
             <?php
-            $stmt = $conn->prepare("select course_id, course_name, course_desc from course");
-            $stmt->execute();
-            $courses = $stmt->fetchAll();
             foreach ($courses as $course) {
             ?>
                 <tr>
