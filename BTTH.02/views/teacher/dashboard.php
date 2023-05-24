@@ -19,7 +19,7 @@ $classes = $statement->fetchAll();
 </head>
 
 <body>
-    <h1>Danh sách lớp</h1>
+    <h1>Danh sách lớp giảng dạy</h1>
     <a href="#" class="btn btn-primary">Thêm</a>
     <table class="table">
         <thead>
