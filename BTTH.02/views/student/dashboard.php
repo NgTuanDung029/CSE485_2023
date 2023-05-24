@@ -1,5 +1,14 @@
 <?php
-include '../../config/database.php';
+    require_once '../config/database.php';
+    session_start();
+    if (isset($_SESSION['username']) && isset($_SESSION['role']) && $_SESSION['role'] === 'student') {
+        $username = $_SESSION['username'];
+        $role = $_SESSION['role'];
+    } else {
+        header("Location: ../../index.php");
+        exit;
+    }
+
 $query = "SELECT * FROM class,course, teacher_class, teacher where teacher.teacher_id = teacher_class.teacher_id and course.course_id = class.course_id";
 $statement = $conn->prepare($query);
 $statement->execute();
