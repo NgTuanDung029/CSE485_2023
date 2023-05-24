@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.student-form {
+    margin-bottom: 20px;
+}
+
+.student-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+.student-form input[type="text"] {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+h1 {
+    text-align: center;
+}
+.submit-btn {
+    margin-top: 20px;
+    width: 100px;
+}
