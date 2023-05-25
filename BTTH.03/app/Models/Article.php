@@ -26,6 +26,10 @@
             return $this->summary;
         }
 
+        public function getContent() {
+            return $this->content;
+        }
+
         public function setTitle($title)
         {
             $this->title = $title;

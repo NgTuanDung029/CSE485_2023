@@ -7,7 +7,6 @@
             $articles = $articleService->getAllArticles();
 
             require_once ('../app/views/article.php');
-            print_r($articles);
         }
     }
 

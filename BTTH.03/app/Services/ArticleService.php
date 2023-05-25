@@ -11,7 +11,7 @@
 
         public function getAllArticles()
         {
-            $sql = "SELECT * FROM article";
+            $sql = "SELECT * FROM article ORDER BY created DESC";
             $result = $this->db->executeQuery($sql);
             if($result)
             {
