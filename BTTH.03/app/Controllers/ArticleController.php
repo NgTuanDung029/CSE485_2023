@@ -8,6 +8,13 @@
 
             require_once ('../app/views/article.php');
         }
+
+        public function edit($id)
+        {
+            $articleService = new ArticleService();
+            $article = $articleService->getArticle($id);
+            require_once ('../app/services/editArticle.php');
+        }
     }
 
 ?>
