@@ -7,7 +7,13 @@
             $articles = $articleService->getAllArticles();
 
             require_once ('../app/views/article.php');
-            print_r($articles);
+        }
+
+        public function edit($id)
+        {
+            $articleService = new ArticleService();
+            $article = $articleService->getArticle($id);
+            require_once ('../app/services/editArticle.php');
         }
     }
 

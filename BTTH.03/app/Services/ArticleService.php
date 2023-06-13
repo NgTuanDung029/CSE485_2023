@@ -11,7 +11,7 @@
 
         public function getAllArticles()
         {
-            $sql = "SELECT * FROM article";
+            $sql = "SELECT * FROM article ORDER BY created DESC";
             $result = $this->db->executeQuery($sql);
             if($result)
             {
@@ -26,6 +26,14 @@
             else {
                 echo "Failed to get articles";
             }
+        }
+
+        public function getArticle($id)
+        {
+            $sql = "SELECT * FROM article WHERE id = :id";
+            $result = $this->db->executeQuery($sql, array($id))->fetch();
+            $article = new Article($result['id'], $result['title'], $result['summary'], $result['content']);
+            return $article;
         }
     }
 
